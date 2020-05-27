@@ -54,3 +54,24 @@ body {
 .form-control {
     border-radius: 0px;
 }
+
+.nav-link {
+    color: #000;
+    background-color: #f7f7f7;
+    font-weight: bold;
+    border-left: 5px solid black;
+    margin-bottom: 10px;
+    background-image: linear-gradient(to left,
+                                      transparent,
+                                      transparent 50%,
+                                      black 50%,
+                                      black);
+                   background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all .25s ease-in;
+}
+
+.nav-link:hover {
+    background-position: 0 0;
+    color: white;
+}
