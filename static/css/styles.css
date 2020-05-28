@@ -87,3 +87,12 @@ body {
 .dropdown-menu {
     border-radius: 0px;
 }
+
+.btn-settings {
+    background-color: #C41230;
+    border: none;
+}
+
+.btn-settings:hover, .btn-settings:active, .btn-settings:focus {
+    background-color: #f14949 !important;
+}
