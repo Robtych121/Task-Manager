@@ -14,6 +14,7 @@ class Task_List(models.Model):
         ('Group', 'Group')
     )
     type = models.CharField(max_length=254, choices=TYPECHOICES, default='')
+    parent_list = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.name

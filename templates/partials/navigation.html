@@ -27,17 +27,18 @@
     {% endif %}
     {% if task_list.type == 'Group' %}
     <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <a class="nav-link" data-toggle="collapse" href="#listgroup{{task_list.id}}" role="button" aria-expanded="false" aria-controls="listgroup{{task_list.id}}">
         <i class="far fa-folder"></i> {{ task_list.name }}
       </a>
-      <div class="collapse" id="collapseExample">
+      <div class="collapse" id="listgroup{{task_list.id}}">
         <ul class="nav nav-pills flex-column collapsedTaskList">
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
-          </li>
+          {% for sub_task_list in sub_task_lists %}
+            {% if sub_task_list.parent_list == task_list.id %}
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fas fa-bars"></i> {{sub_task_list.name}}</a>
+            </li>
+            {% endif %}
+          {% endfor %}
         </ul>
       </div>
     </li>
