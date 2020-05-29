@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from .forms import TaskListForm
+from .models import Task_List
+
 
 # Create your views here.
+def create_or_edit_task_list(request, pk=None):
+    """
+    Create a view that allows us to create
+    or edit a task list depending if the task list ID
+    is null or not
+    """
+    task_list = get_object_or_404(Task_List, pk=pk) if pk else None
+    if request.method == 'POST':
+        form = TaskListForm(request.POST, instance=task_list)
+        if form.is_valid():
+            task_list = form.save(commit=False)
+            task_list.save()
+            return redirect('home')
+    else:
+        form = TaskListForm(instance=task_list)
+    return render(request, 'task_list_form.html', {'form': form})
