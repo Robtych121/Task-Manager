@@ -19,15 +19,16 @@
   </ul>
   <p class="menu_section">Shared Lists</p>
   <ul class="nav nav-pills flex-column">
+    {% for task_list in task_lists %}
+    {% if task_list.type == 'Normal' %}
     <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
+      <a class="nav-link" href="#"><i class="fas fa-bars"></i> {{ task_list.name }}</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
-    </li>
+    {% endif %}
+    {% if task_list.type == 'Group' %}
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-        <i class="far fa-folder"></i> Link with href
+        <i class="far fa-folder"></i> {{ task_list.name }}
       </a>
       <div class="collapse" id="collapseExample">
         <ul class="nav nav-pills flex-column collapsedTaskList">
@@ -40,9 +41,8 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
-    </li>
+    {% endif %}
+    {% endfor %}
   </ul>
   <p class="add_list"><i class="fas fa-plus"></i> New List</p>
 {% endif %}
