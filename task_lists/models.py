@@ -9,6 +9,11 @@ class Task_List(models.Model):
         verbose_name_plural = 'Task Lists'
 
     name = models.CharField(max_length=254, default='')
+    TYPECHOICES = (
+        ('Normal', 'Normal'),
+        ('Group', 'Group')
+    )
+    type = models.CharField(max_length=254, choices=TYPECHOICES, default='')
 
     def __str__(self):
         return self.name
