@@ -1,14 +1,48 @@
 {% if user.is_authenticated %}
-<p class="menu_section">Section Header</p>
+<p class="menu_section">Your Lists</p>
 <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="#"><i class="fas fa-user"></i> Assigned To You</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="#"><i class="far fa-sun"></i> Today</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="#"><i class="far fa-calendar-alt"></i> Planned</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fas fa-star"></i> Important</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fas fa-home"></i> Tasks</a>
     </li>
   </ul>
+  <p class="menu_section">Shared Lists</p>
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <i class="far fa-folder"></i> Link with href
+      </a>
+      <div class="collapse" id="collapseExample">
+        <ul class="nav nav-pills flex-column collapsedTaskList">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fas fa-bars"></i> Link</a>
+    </li>
+  </ul>
+  <p class="add_list"><i class="fas fa-plus"></i> New List</p>
 {% endif %}
