@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import TaskListForm
 from .models import Task_List, Task
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -32,5 +33,6 @@ def view_list(request, id):
     """
     task_list = Task_List.objects.filter(id=id).first()
     tasks = Task.objects.filter(list=task_list.id)
+    users = User.objects.all()
 
-    return render(request, 'view_task_list.html', {'tasks': tasks, 'task_list': task_list})
+    return render(request, 'view_task_list.html', {'tasks': tasks, 'task_list': task_list, 'users': users})

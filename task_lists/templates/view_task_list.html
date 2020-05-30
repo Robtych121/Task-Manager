@@ -7,9 +7,22 @@
 {% block content %}
 <div class="task-list-container">
     <div class="card">
-        <div class="card-body">
+        <div class="card-body task_list">
             {% for task in tasks %}
-                {{ task.completed}} - {{ task.name}} {{ task.importance}} {{ task.assigned_to}}
+                <form class="form-inline" action="">
+                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="" {% if task.completed == 'Yes' %}checked {% endif %}>
+                </form>
+                <div>
+                    {{ task.name}}
+                </div>
+                <div class="task_extras">
+                    {% if task.assigned_to == user.id %}
+                        {{user.username}}
+                    {% endif%}
+                </div>
+                <form class="form-inline" action="">
+                    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="" {% if task.importance == 'Yes' %} checked {% endif %}>
+                </form>
             {% empty %}
                 No Tasks Created
             {% endfor %}
