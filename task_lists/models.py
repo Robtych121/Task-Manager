@@ -22,13 +22,14 @@ class Task_List(models.Model):
 class Task(models.Model):
     list = models.ForeignKey(Task_List, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=254, default='')
-    description = models.TextField(default='')
+    description = models.TextField(default='', blank=True)
     due_date = models.DateField(default=datetime.now)
     YESNOCHOICES = (
         ('Yes', 'Yes'),
         ('No', 'No')
     )
     importance = models.CharField(max_length=25, choices=YESNOCHOICES)
+    completed = models.CharField(max_length=25, choices=YESNOCHOICES, default='No')
     assigned_to = models.IntegerField()
 
     def __str__(self):
