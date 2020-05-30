@@ -30,6 +30,7 @@ def view_list(request, id):
     """
     A view to show the list and the tasks associated to it
     """
-    tasks = Task.objects.filter(list=id)
+    task_list = Task_List.objects.filter(id=id).first()
+    tasks = Task.objects.filter(list=task_list.id)
 
-    return render(request, 'view_task_list.html', {'tasks': tasks})
+    return render(request, 'view_task_list.html', {'tasks': tasks, 'task_list': task_list})
