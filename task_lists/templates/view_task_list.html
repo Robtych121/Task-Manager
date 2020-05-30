@@ -6,21 +6,22 @@
 
 {% block content %}
 <div class="task-list-container">
-{% for task in tasks %}
-<p>{{ task.completed}}</p>
-<p>{{ task.name}}</p>
-<p>{{ task.description}}</p>
-<p>{{ task.due_date}}</p>
-<p>{{ task.importance}}</p>
-<p>{{ task.assigned_to}}</p>
-{% empty %}
-<p>No Tasks Created</p>
-{% endfor %}
+    <div class="card">
+        <div class="card-body">
+            {% for task in tasks %}
+                {{ task.completed}} - {{ task.name}} {{ task.importance}} {{ task.assigned_to}}
+            {% empty %}
+                No Tasks Created
+            {% endfor %}
+        </div>
+    </div>
 </div>
 <hr>
 <div class="enter-task-container">
     <form action="">
         <div class="input-group mb-3">
+            <input type="hidden" name="new_task_list_id" id="id_new_task_list_id" value="{{ task_list.id }}">
+            <input type="hidden" name="new_task_list_user" id="id_new_task_list_user" value="{{ user.id }}">
             <input type="text" class="form-control" id="id_new_task" name="new_task" placeholder="Start typing.." aria-label="Recipient's username" aria-describedby="button-addon2">
             <div class="input-group-append">
               <button class="btn btn-outline-success" type="button" id="button-addon2">Add Task</button>
