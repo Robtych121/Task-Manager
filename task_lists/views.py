@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import TaskListForm
-from .models import Task_List
+from .models import Task_List, Task
 
 
 # Create your views here.
@@ -24,3 +24,12 @@ def create_or_edit_task_list(request, pk=None):
     else:
         form = TaskListForm(instance=task_list)
     return render(request, 'task_list_form.html', {'form': form, 'grouped_lists': grouped_lists})
+
+
+def view_list(request, id):
+    """
+    A view to show the list and the tasks associated to it
+    """
+    tasks = Task.objects.filter(list=id)
+
+    return render(request, 'view_task_list.html', {'tasks': tasks})

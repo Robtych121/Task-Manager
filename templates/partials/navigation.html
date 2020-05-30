@@ -22,7 +22,7 @@
     {% for task_list in task_lists %}
     {% if task_list.type == 'Normal' %}
     <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fas fa-bars"></i> {{ task_list.name }}</a>
+      <a class="nav-link" href="{% url 'view_list' task_list.id %}"><i class="fas fa-bars"></i> {{ task_list.name }}</a>
     </li>
     {% endif %}
     {% if task_list.type == 'Group' %}
@@ -35,7 +35,7 @@
           {% for sub_task_list in sub_task_lists %}
             {% if sub_task_list.parent_list == task_list.id %}
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-bars"></i> {{sub_task_list.name}}</a>
+              <a class="nav-link" href="{% url 'view_list' sub_task_list.id %}"><i class="fas fa-bars"></i> {{sub_task_list.name}}</a>
             </li>
             {% endif %}
           {% endfor %}
