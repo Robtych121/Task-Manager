@@ -104,3 +104,7 @@ body {
 .add_list, .add_list:hover {
     color: black;
 }
+
+a.btn-danger, a.btn-danger:hover {
+    color: white;
+}
