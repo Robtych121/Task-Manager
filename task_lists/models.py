@@ -30,7 +30,7 @@ class Task(models.Model):
     )
     importance = models.CharField(max_length=25, choices=YESNOCHOICES)
     completed = models.CharField(max_length=25, choices=YESNOCHOICES, default='No')
-    assigned_to = models.IntegerField()
+    assigned_to = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.name
