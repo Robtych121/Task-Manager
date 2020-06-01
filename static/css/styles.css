@@ -117,6 +117,10 @@ a.btn-danger, a.btn-danger:hover {
     display: inline-flex;
 }
 
+.card-body {
+    padding: 5px 10px;
+}
+
 .container input {position: absolute;opacity: 0;cursor: pointer;height: 0;width: 0;}
 
 .checkmark {position: absolute;top: 5px;left: 0;height: 25px;width: 25px;background-color: #eee;border: 1px solid #C41230;border-radius: 25px;}
