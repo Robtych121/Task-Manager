@@ -15,6 +15,11 @@ class Task_List(models.Model):
     )
     type = models.CharField(max_length=254, choices=TYPECHOICES, default='')
     parent_list = models.IntegerField(blank=True, null=True)
+    SORTCHOICES = (
+        ('Ascending', 'Ascending'),
+        ('Descending', 'Descending')
+    )
+    sort_by = models.CharField(max_length=254, choices=SORTCHOICES, default='Ascending')
 
     def __str__(self):
         return self.name

@@ -36,7 +36,10 @@ def view_list(request, id):
     A view to show the list and the tasks associated to it
     """
     task_list = Task_List.objects.filter(id=id).first()
-    tasks = Task.objects.filter(list=task_list.id)
+    if task_list.sort_by == 'Ascending':
+        tasks = Task.objects.filter(list=task_list.id).order_by('name')
+    else:
+        tasks = Task.objects.filter(list=task_list.id).order_by('-name')
     users = User.objects.all()
 
     return render(request, 'view_task_list.html', {'tasks': tasks, 'task_list': task_list, 'users': users})
