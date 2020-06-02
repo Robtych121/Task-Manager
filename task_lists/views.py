@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import TaskListForm, CreateTaskForm
 from .models import Task_List, Task
 from django.contrib.auth.models import User
+from django.views.decorators.http import require_http_methods
 
 
 # Create your views here.
@@ -39,3 +40,18 @@ def view_list(request, id):
     users = User.objects.all()
 
     return render(request, 'view_task_list.html', {'tasks': tasks, 'task_list': task_list, 'users': users})
+
+
+@require_http_methods(["POST"])
+def create_new_task_post(request):
+    """
+    Creates new task from a posted form on task list
+    """
+    data = request.POST.copy()
+    list_id = int(data.get('new_task_list_id'))
+    task_list = Task_List.objects.filter(id=data.get('new_task_list_id')).first()
+
+    task = Task(name=data.get('new_task'),list=task_list)
+    task.save()
+
+    return redirect('view_list', list_id)

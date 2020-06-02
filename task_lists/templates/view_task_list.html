@@ -32,7 +32,7 @@
             </div>
         </td>
         <td style="width: 20px;">
-            <form action="">
+            <form action="" method="POST">
                 <label class="container">
                     <input class="form-check-input position-static" type="checkbox" name="importance" id="importance" {% if task.importance == 'Yes' %}checked {% endif %}>
                     <span class="checkmark1"></span>
@@ -49,12 +49,12 @@ No Tasks Created
 </div>
 <hr>
 <div class="enter-task-container">
-    <form action="" method="POST">
+    <form action="{% url 'create_new_task_post' %}" method="POST">
         {% csrf_token %}
         <div class="input-group mb-3">
             <input type="hidden" name="new_task_list_id" id="id_new_task_list_id" value="{{ task_list.id }}">
             <input type="hidden" name="new_task_list_user" id="id_new_task_list_user" value="{{ user.id }}">
-            <input type="text" class="form-control" id="id_new_task" name="new_task" placeholder="Start typing.." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control" id="id_new_task" name="new_task" placeholder="Start typing.." aria-label="Recipient's username" aria-describedby="button-addon2" required>
             <div class="input-group-append">
               <button class="btn btn-outline-success" type="submit" id="button-addon2">Add Task</button>
             </div>
