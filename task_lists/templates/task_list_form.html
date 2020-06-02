@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label for="id_parent_list" class="control-label required-field ">Parent Group</label>
                 <select class="form-control" name="parent_list" id="id_parent_list">
-                    <option value="">Please Select</option>
+                    <option value="0">Please Select</option>
                     {% for grouped_list in grouped_lists %}
                     <option value="{{grouped_list.id}}">{{grouped_list.name}}</option>
                     {% endfor %}

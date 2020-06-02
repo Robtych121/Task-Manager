@@ -19,7 +19,10 @@ def create_or_edit_task_list(request, pk=None):
         form = TaskListForm(request.POST, instance=task_list)
         if form.is_valid():
             task_list = form.save(commit=False)
-            task_list.parent_list = data.get('parent_list')
+            if(data.get('parent_list') == '0'):
+                task_list.parent_list = None
+            else:
+                task_list.parent_list = data.get('parent_list')
             task_list.save()
             return redirect('home')
     else:
