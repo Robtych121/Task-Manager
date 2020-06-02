@@ -142,3 +142,14 @@ a.btn-danger, a.btn-danger:hover {
 .checkmark1:after {content: "";position: absolute;display: none;}
 .container input:checked ~ .checkmark1:after {display: block;}
 .container .checkmark1:after {left: 9px;top: 5px;width: 5px;height: 10px;border: solid white;border-width: 0 3px 3px 0;-webkit-transform: rotate(45deg);-ms-transform: rotate(45deg);transform: rotate(45deg);}
+
+
+
+#list_options_con {
+    line-height:35px;
+    float: right;
+}
+
+.dropdown-menu {
+    line-height: 25px;
+}
