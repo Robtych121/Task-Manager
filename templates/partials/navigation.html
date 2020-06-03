@@ -19,7 +19,7 @@
   </ul>
   <p class="menu_section">Shared Lists</p>
   <ul class="nav nav-pills flex-column">
-    {% for task_list in task_lists %}
+    {% for task_list in nav_task_lists %}
     {% if task_list.type == 'Normal' %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'view_list' task_list.id %}"><i class="fas fa-bars"></i> {{ task_list.name }}</a>

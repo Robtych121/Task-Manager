@@ -76,3 +76,19 @@ def manage_task_lists(request):
     task_lists = Task_List.objects.all().order_by('name')
 
     return render(request, 'manage_task_lists.html', {'task_lists': task_lists})
+
+
+def delete_task_list_post_manage(request, id):
+    """
+    Deletes the selected list and redirects to manage lists page
+    """
+    task_list = Task_List.objects.get(pk=id)
+
+    if task_list.type == 'Normal':
+        task_list.delete()
+        return redirect('manage_task_lists')
+    else:
+        sublists = Task_List.objects.filter(parent_list=id)
+        sublists.delete()
+        task_list.delete()
+        return redirect('manage_task_lists')
