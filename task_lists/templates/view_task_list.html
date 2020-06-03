@@ -7,42 +7,44 @@
 {% block content %}
 <div class="task-list-container">
 {% for task in tasks %}
-<div class="card">
-<div class="card-body task_list">
-<table class="col-12">
-    <tr>
-        <td style="width: 20px;">
-            <form action="">
-                <label class="container">
-                    <input class="form-check-input position-static" type="checkbox" name="completed" id="completed" {% if task.completed == 'Yes' %}checked {% endif %}>
-                    <span class="checkmark"></span>
-                </label>
-            </form>
-        </td>
-        <td>
-            <div>
-                {{ task.name}}
-            </div>
-        </td>
-        <td style="width: 60px;">
-            <div class="task_extras">
-                {% if task.assigned_to == user.id %}
-                    {{user.username}}
-                {% endif%}
-            </div>
-        </td>
-        <td style="width: 20px;">
-            <form action="" method="POST">
-                <label class="container">
-                    <input class="form-check-input position-static" type="checkbox" name="importance" id="importance" {% if task.importance == 'Yes' %}checked {% endif %}>
-                    <span class="checkmark1"></span>
-                </label>
-            </form>
-        </td>
-    </tr>
-</table>            
-</div>
-</div>
+<a class="TaskContainer" href="#">
+    <div class="card TaskContainerInternal">
+        <div class="card-body task_list">
+        <table class="col-12">
+            <tr>
+                <td style="width: 20px;">
+                    <form action="">
+                        <label class="container">
+                            <input class="form-check-input position-static" type="checkbox" name="completed" id="completed" {% if task.completed == 'Yes' %}checked {% endif %}>
+                            <span class="checkmark"></span>
+                        </label>
+                    </form>
+                </td>
+                <td>
+                    <div>
+                        <span class="TaskName">{{ task.name}}</span>
+                    </div>
+                </td>
+                <td style="width: 60px;">
+                    <div class="task_extras">
+                        {% if task.assigned_to == user.id %}
+                            {{user.username}}
+                        {% endif%}
+                    </div>
+                </td>
+                <td style="width: 20px;">
+                    <form action="" method="POST">
+                        <label class="container">
+                            <input class="form-check-input position-static" type="checkbox" name="importance" id="importance" {% if task.importance == 'Yes' %}checked {% endif %}>
+                            <span class="checkmark1"></span>
+                        </label>
+                    </form>
+                </td>
+            </tr>
+        </table>            
+        </div>
+    </div>
+</a>
 {% empty %}
 No Tasks Created
 {% endfor %}

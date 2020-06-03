@@ -158,3 +158,20 @@ a.btn-danger, a.btn-danger:hover {
     color: black;
     text-decoration: none;
 }
+
+.TaskName, .TaskName:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.TaskContainer:hover {
+    text-decoration: none;
+}
+
+.TaskContainerInternal:hover {
+    background-color: #dadada;
+}
+
+.TaskContainerInternal {
+    transition: all 0.2s;
+}
