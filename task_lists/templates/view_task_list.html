@@ -69,8 +69,7 @@ No Tasks Created
       
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
             {% if user.is_authenticated %}
-                <a class="dropdown-item" href="">Edit</a>
-                <a class="dropdown-item" href="">Sort By</a>
+                <a class="dropdown-item" href="{% url 'edit_task_list' task_list.id %}">Edit</a>
                 <a class="dropdown-item" href="" data-toggle="modal" data-target="#DeleteListModal">Delete</a>
             {% endif %}
         </div>

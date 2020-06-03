@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import TaskListForm, CreateTaskForm
+from .forms import TaskListForm, CreateTaskForm, EditTaskListForm
 from .models import Task_List, Task
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_http_methods
@@ -92,3 +92,39 @@ def delete_task_list_post_manage(request, id):
         sublists.delete()
         task_list.delete()
         return redirect('manage_task_lists')
+
+
+def edit_task_list(request, id):
+    """
+    Edits the current task list
+    """
+    task_list = Task_List.objects.get(pk=id)
+
+    if request.method == "POST":
+        form = EditTaskListForm(request.POST, instance=task_list)
+
+        if form.is_valid():
+            form.save()
+            return redirect('view_list', task_list.id)
+    else:
+        form = EditTaskListForm(instance=task_list)
+
+    return render(request, "edit_task_list.html", {'form':form})
+
+
+def edit_task_list_manage(request, id):
+    """
+    Edits the current task list from manager
+    """
+    task_list = Task_List.objects.get(pk=id)
+
+    if request.method == "POST":
+        form = EditTaskListForm(request.POST, instance=task_list)
+
+        if form.is_valid():
+            form.save()
+            return redirect('manage_task_lists')
+    else:
+        form = EditTaskListForm(instance=task_list)
+
+    return render(request, "edit_task_list.html", {'form':form})

@@ -10,3 +10,9 @@ class CreateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ('name',)
+
+
+class EditTaskListForm(forms.ModelForm):
+    class Meta:
+        model = Task_List
+        fields = ('name', 'sort_by')
