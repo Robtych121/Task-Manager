@@ -18,7 +18,7 @@
     <div class="row top-header">
         <div class="col-md-6">
             {% if user.is_authenticated %}
-            <h3>Task Manager</h3>
+            <a class="LogoLink" href="{% url 'home' %}"><h3>Task Manager</h3></a>
             {% endif %}
         </div>
         <div class="col-md-6 text-right">
