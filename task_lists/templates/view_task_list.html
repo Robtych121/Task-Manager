@@ -87,11 +87,11 @@ No Tasks Created
           </button>
         </div>
         <div class="modal-body">
-          <p>This action cannot be reversed once completed.</p>
+          <p>This action cannot be reversed once completed. All Associated tasks will also be deleted.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="button" href="" class="btn btn-success">Save changes</button>
+          <a href="{% url 'delete_task_list_post' task_list.id %}" class="btn btn-success">Save changes</a>
         </div>
       </div>
     </div>

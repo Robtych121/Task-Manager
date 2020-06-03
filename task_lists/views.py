@@ -59,11 +59,11 @@ def create_new_task_post(request):
 
     return redirect('view_list', list_id)
 
-@require_http_methods(["POST"])
+
 def delete_task_list_post(request, id):
     """
     Deletes the selected list
     """
-    task_list = Task_List.objects.filter(id=id).first()
+    task_list = Task_List.objects.get(pk=id)
     task_list.delete()
     return redirect('home')
