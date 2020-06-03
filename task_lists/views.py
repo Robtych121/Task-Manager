@@ -99,6 +99,7 @@ def edit_task_list(request, id):
     Edits the current task list
     """
     task_list = Task_List.objects.get(pk=id)
+    grouped_lists_select = Task_List.objects.filter(type='Group')
 
     if request.method == "POST":
         form = EditTaskListForm(request.POST, instance=task_list)
@@ -109,7 +110,7 @@ def edit_task_list(request, id):
     else:
         form = EditTaskListForm(instance=task_list)
 
-    return render(request, "edit_task_list.html", {'form':form})
+    return render(request, "edit_task_list.html", {'grouped_lists_select': grouped_lists_select, 'form':form})
 
 
 def edit_task_list_manage(request, id):
@@ -117,6 +118,7 @@ def edit_task_list_manage(request, id):
     Edits the current task list from manager
     """
     task_list = Task_List.objects.get(pk=id)
+    grouped_lists_select = Task_List.objects.filter(type='Group')
 
     if request.method == "POST":
         form = EditTaskListForm(request.POST, instance=task_list)
@@ -127,4 +129,4 @@ def edit_task_list_manage(request, id):
     else:
         form = EditTaskListForm(instance=task_list)
 
-    return render(request, "edit_task_list.html", {'form':form})
+    return render(request, "edit_task_list.html", {'grouped_lists_select': grouped_lists_select, 'form':form})

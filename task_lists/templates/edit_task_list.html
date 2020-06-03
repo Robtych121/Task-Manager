@@ -8,6 +8,20 @@
     <form method="POST">
         {% csrf_token %}
         {{ form | as_bootstrap }}
+        <div id="div_id_parent_list" class="form-group">
+            <label for="id_parent_list" class="control-label required-field ">
+                Parent List
+            </label>
+            <div class="">
+                <select name="parent_list" class="form-control" id="id_parent_list">
+                    {% for grouped_list in grouped_lists_select %}
+                    <option value="{{ grouped_list.id }}">{{grouped_list.name}}</option>
+                    {% empty %}
+                    <option disabled selected>No Group Lists</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
         <button type="submit" class="btn btn-info">Save</button>
         <a class="btn btn-danger" onclick="window.history.go(-1);">Cancel</a>
     </form>
