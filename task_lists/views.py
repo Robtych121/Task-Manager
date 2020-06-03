@@ -67,3 +67,12 @@ def delete_task_list_post(request, id):
     task_list = Task_List.objects.get(pk=id)
     task_list.delete()
     return redirect('home')
+
+
+def manage_task_lists(request):
+    """
+    Displays all task lists regardless of type
+    """
+    task_lists = Task_List.objects.all().order_by('name')
+
+    return render(request, 'manage_task_lists.html', {'task_lists': task_lists})

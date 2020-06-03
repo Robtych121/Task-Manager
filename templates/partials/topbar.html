@@ -8,6 +8,7 @@
             {% if request.user.is_staff %}
                 <a class="dropdown-item" href="/admin" target="_blank">ACP</a>
             {% endif %}
+            <a class="dropdown-item" href="{% url 'manage_task_lists' %}">Manage Lists</a>
             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
         {% endif %}
     </div>
