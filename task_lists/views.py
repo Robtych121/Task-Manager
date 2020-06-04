@@ -74,8 +74,10 @@ def manage_task_lists(request):
     Displays all task lists regardless of type
     """
     task_lists = Task_List.objects.all().order_by('name')
+    task_listnames = Task_List.objects.all().order_by('name')
 
-    return render(request, 'manage_task_lists.html', {'task_lists': task_lists})
+
+    return render(request, 'manage_task_lists.html', {'task_lists': task_lists, 'task_listnames': task_listnames})
 
 
 def delete_task_list_post_manage(request, id):
