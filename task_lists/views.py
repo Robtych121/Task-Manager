@@ -104,15 +104,23 @@ def edit_task_list(request, id):
     grouped_lists_select = Task_List.objects.filter(type='Group')
 
     if request.method == "POST":
+        data = request.POST.copy()
         form = EditTaskListForm(request.POST, instance=task_list)
-
+        
         if form.is_valid():
-            form.save()
+            task_list = form.save(commit=False)
+            
+            if data.get('parent_list') == 'None':
+                task_list.parent_list = None
+            else:
+                task_list.parent_list = data.get('parent_list')
+
+            task_list.save()
             return redirect('view_list', task_list.id)
     else:
         form = EditTaskListForm(instance=task_list)
 
-    return render(request, "edit_task_list.html", {'grouped_lists_select': grouped_lists_select, 'form':form})
+    return render(request, "edit_task_list.html", {'task_list': task_list, 'grouped_lists_select': grouped_lists_select, 'form':form})
 
 
 def edit_task_list_manage(request, id):
