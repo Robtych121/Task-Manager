@@ -8,12 +8,14 @@
     <form method="POST">
         {% csrf_token %}
         {{ form | as_bootstrap }}
+        {% if task_list.type == 'Normal' %}
         <div id="div_id_parent_list" class="form-group">
             <label for="id_parent_list" class="control-label required-field ">
                 Parent List
             </label>
             <div class="">
                 <select name="parent_list" class="form-control" id="id_parent_list">
+                    <option value="None">Not Grouped</option>
                     {% for grouped_list in grouped_lists_select %}
                     <option value="{{ grouped_list.id }}">{{grouped_list.name}}</option>
                     {% empty %}
@@ -22,6 +24,7 @@
                 </select>
             </div>
         </div>
+        {% endif %}
         <button type="submit" class="btn btn-info">Save</button>
         <a class="btn btn-danger" onclick="window.history.go(-1);">Cancel</a>
     </form>
