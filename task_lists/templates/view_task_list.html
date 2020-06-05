@@ -35,10 +35,7 @@
                 <td style="width: 20px;">
                     <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_list' task.id %}" method="POST">
                         {% csrf_token %}
-                        <label class="container">
-                            <input class="form-check-input position-static" type="checkbox" name="importance{{task.id}}" id="importance{{task.id}}" {% if task.importance == 'Yes' %}checked {% endif %}>
-                            <span class="checkmark1"></span>
-                        </label>
+                        <input class="checkboxstar form-check-input position-static" type="checkbox" name="importance{{task.id}}" id="importance{{task.id}}" {% if task.importance == 'Yes' %}checked {% endif %}>
                     </form>
                     <script>
     
