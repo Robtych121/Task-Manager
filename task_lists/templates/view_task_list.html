@@ -33,12 +33,21 @@
                     </div>
                 </td>
                 <td style="width: 20px;">
-                    <form action="" method="POST">
+                    <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_list' task.id %}" method="POST">
+                        {% csrf_token %}
                         <label class="container">
-                            <input class="form-check-input position-static" type="checkbox" name="importance" id="importance" {% if task.importance == 'Yes' %}checked {% endif %}>
+                            <input class="form-check-input position-static" type="checkbox" name="importance{{task.id}}" id="importance{{task.id}}" {% if task.importance == 'Yes' %}checked {% endif %}>
                             <span class="checkmark1"></span>
                         </label>
                     </form>
+                    <script>
+    
+                        $(document).ready(function() {
+                            $('#importance{{task.id}}').on('change', function() {
+                                this.form.submit();
+                            });
+                        });
+                    </script>
                 </td>
             </tr>
         </table>            
@@ -98,8 +107,17 @@ No Tasks Created
     </div>
   </div>
 <script>
-    if($('#task_list_options_container')) {
-        list_options_con.appendChild(task_list_options_container);
-    }
+    
+    $(document).ready(function() {
+        // Appends the options container to the page title area
+        if($('#task_list_options_container')) {
+            list_options_con.appendChild(task_list_options_container);
+        }
+
+        // when 'importance' checkbox is changed, submit the form
+        $('#importance').on('change', function() {
+            this.form.submit();
+        });
+    });
 </script>
 {% endblock %}

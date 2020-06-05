@@ -148,3 +148,21 @@ def edit_task_list_manage(request, id):
         form = EditTaskListForm(instance=task_list)
 
     return render(request, "edit_task_list.html", {'task_list': task_list, 'grouped_lists_select': grouped_lists_select, 'form':form})
+
+
+def set_importance_from_list(request, id):
+    """
+    Sets the importance flag from task list
+    """
+
+    task = Task.objects.get(pk=id)
+    importance = 'importance' + str(task.id)
+
+    if request.method == 'POST':
+        data = request.POST.copy()
+        if data.get(importance) == None:
+            task.importance = 'No'
+        else:
+            task.importance = 'Yes'
+        task.save()
+        return redirect('view_list', task.list.id)
