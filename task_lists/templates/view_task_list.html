@@ -13,12 +13,20 @@
         <table class="col-12">
             <tr>
                 <td style="width: 20px;">
-                    <form action="">
+                    <form action="{% url 'set_completed_from_list' task.id %}" method="POST">
+                        {% csrf_token %}
                         <label class="container">
-                            <input class="form-check-input position-static" type="checkbox" name="completed" id="completed" {% if task.completed == 'Yes' %}checked {% endif %}>
+                            <input class="form-check-input position-static" type="checkbox" name="completed{{task.id}}" id="completed{{task.id}}" {% if task.completed == 'Yes' %}checked {% endif %}>
                             <span class="checkmark"></span>
                         </label>
                     </form>
+                    <script>
+                        $(document).ready(function() {
+                            $('#completed{{task.id}}').on('change', function() {
+                                this.form.submit();
+                            });
+                        });
+                    </script>
                 </td>
                 <td>
                     <div>
@@ -38,7 +46,6 @@
                         <input class="checkboxstar form-check-input position-static" type="checkbox" name="importance{{task.id}}" id="importance{{task.id}}" {% if task.importance == 'Yes' %}checked {% endif %}>
                     </form>
                     <script>
-    
                         $(document).ready(function() {
                             $('#importance{{task.id}}').on('change', function() {
                                 this.form.submit();

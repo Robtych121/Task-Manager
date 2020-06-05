@@ -166,3 +166,21 @@ def set_importance_from_list(request, id):
             task.importance = 'Yes'
         task.save()
         return redirect('view_list', task.list.id)
+
+
+def set_completed_from_list(request, id):
+    """
+    Sets the completed flag from task list
+    """
+
+    task = Task.objects.get(pk=id)
+    completed = 'completed' + str(task.id)
+
+    if request.method == 'POST':
+        data = request.POST.copy()
+        if data.get(completed) == None:
+            task.completed = 'No'
+        else:
+            task.completed = 'Yes'
+        task.save()
+        return redirect('view_list', task.list.id)
