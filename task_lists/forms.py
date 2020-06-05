@@ -16,3 +16,9 @@ class EditTaskListForm(forms.ModelForm):
     class Meta:
         model = Task_List
         fields = ('name', 'sort_by')
+
+
+class EditTaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('name', 'description', 'due_date', 'importance', 'completed')
