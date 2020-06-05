@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import TaskListForm, CreateTaskForm, EditTaskListForm
+from .forms import TaskListForm, CreateTaskForm, EditTaskListForm, EditTaskForm
 from .models import Task_List, Task
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_http_methods
@@ -184,3 +184,25 @@ def set_completed_from_list(request, id):
             task.completed = 'Yes'
         task.save()
         return redirect('view_list', task.list.id)
+
+
+def edit_task(request, id):
+    """
+    opens up edit form for when click into a task
+    """
+
+    task = Task.objects.get(pk=id)
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        form = EditTaskForm(request.POST, instance=task)
+        
+        if form.is_valid():
+            task = form.save(commit=False)
+
+            task.save()
+            return redirect('view_list', task.list.id)
+    else:
+        form = EditTaskForm(instance=task)
+
+    return render(request, "edit_task.html", {'task': task, 'form':form})

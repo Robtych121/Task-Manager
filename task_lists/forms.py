@@ -1,5 +1,6 @@
 from django import forms
 from .models import Task_List, Task
+import html5.forms.widgets as html5_widgets
 
 class TaskListForm(forms.ModelForm):
     class Meta:
@@ -22,3 +23,6 @@ class EditTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ('name', 'description', 'due_date', 'importance', 'completed')
+        widgets = {
+            'due_date': html5_widgets.DateInput
+        }

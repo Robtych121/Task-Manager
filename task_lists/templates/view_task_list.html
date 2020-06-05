@@ -7,7 +7,7 @@
 {% block content %}
 <div class="task-list-container">
 {% for task in tasks %}
-<a class="TaskContainer" href="#">
+<a class="TaskContainer" href="{% url 'edit_task' task.id %}">
     <div class="card TaskContainerInternal">
         <div class="card-body task_list">
         <table class="col-12">
