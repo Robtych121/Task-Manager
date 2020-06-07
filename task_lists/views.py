@@ -97,6 +97,9 @@ def delete_task_list_post_manage(request, id):
         task_list.delete()
         return redirect('manage_task_lists')
     else:
+        sublistsid = Task_List.objects.filter(parent_list=id).values_list('id')
+        subtasklistusers = Task_List_Users.objects.filter(list_id__in=sublistsid)
+        subtasklistusers.delete()
         sublists = Task_List.objects.filter(parent_list=id)
         sublists.delete()
         tasklistusers.delete()
