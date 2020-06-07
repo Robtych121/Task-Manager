@@ -91,7 +91,8 @@ No Tasks Created
             {% for task_list_user in task_list_users %}
                 {% if task_list_user.list_id == task_list.id and task_list_user.perm_edit == 'Yes'  %}
                 <a class="dropdown-item" href="{% url 'edit_task_list' task_list.id %}">Edit</a>
-                {% else %}
+                {% endif %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_edit == 'No'  %}
                 <a class="dropdown-item disabled" href="">Edit</a>
                 {% endif %}
             {% endfor %}
@@ -99,7 +100,8 @@ No Tasks Created
             {% for task_list_user in task_list_users %}
                 {% if task_list_user.list_id == task_list.id and task_list_user.perm_delete == 'Yes'  %}
                 <a class="dropdown-item" href="" data-toggle="modal" data-target="#DeleteListModal">Delete</a>
-                {% else %}
+                {% endif %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_delete == 'No'  %}
                 <a class="dropdown-item disabled" href="">Delete</a>
                 {% endif %}
             {% endfor %}
