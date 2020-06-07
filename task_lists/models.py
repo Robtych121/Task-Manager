@@ -33,7 +33,7 @@ class Task(models.Model):
         ('Yes', 'Yes'),
         ('No', 'No')
     )
-    importance = models.CharField(max_length=25, choices=YESNOCHOICES)
+    importance = models.CharField(max_length=25, choices=YESNOCHOICES, default='No')
     completed = models.CharField(max_length=25, choices=YESNOCHOICES, default='No')
     assigned_to = models.IntegerField(blank=True, null=True)
 
