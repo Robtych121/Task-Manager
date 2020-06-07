@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import TaskListForm, CreateTaskForm, EditTaskListForm, EditTaskForm
-from .models import Task_List, Task
+from .models import Task_List, Task, Task_List_Users
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_http_methods
 
@@ -25,6 +25,8 @@ def create_or_edit_task_list(request, pk=None):
             else:
                 task_list.parent_list = data.get('parent_list')
             task_list.save()
+            TaskListUsers = Task_List_Users(list_id=task_list.id, user_id=request.user.id, perm_view="Yes", perm_add="Yes", perm_edit="Yes", perm_delete="Yes")
+            TaskListUsers.save()
             return redirect('home')
     else:
         form = TaskListForm(instance=task_list)
