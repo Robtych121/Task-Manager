@@ -21,7 +21,7 @@
   <ul class="nav nav-pills flex-column">
     {% for task_list in nav_task_lists %}
       {% for task_list_user in task_list_users %}
-      {% if task_list_user.user_id == request.user.id and task_list_user.list_id == task_list.id %}
+      {% if task_list_user.user_id == request.user.id and task_list_user.list_id == task_list.id and task_list_user.perm_view == 'Yes' %}
         {% if task_list.type == 'Normal' %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'view_list' task_list.id %}"><i class="fas fa-bars"></i> {{ task_list.name }}</a>
