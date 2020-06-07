@@ -67,6 +67,9 @@ def delete_task_list_post(request, id):
     Deletes the selected list
     """
     task_list = Task_List.objects.get(pk=id)
+    tasklistusers = Task_List_Users.objects.filter(list_id=id)
+    
+    tasklistusers.delete()
     task_list.delete()
     return redirect('home')
 
@@ -87,13 +90,16 @@ def delete_task_list_post_manage(request, id):
     Deletes the selected list and redirects to manage lists page
     """
     task_list = Task_List.objects.get(pk=id)
+    tasklistusers = Task_List_Users.objects.filter(list_id=id)
 
     if task_list.type == 'Normal':
+        tasklistusers.delete()
         task_list.delete()
         return redirect('manage_task_lists')
     else:
         sublists = Task_List.objects.filter(parent_list=id)
         sublists.delete()
+        tasklistusers.delete()
         task_list.delete()
         return redirect('manage_task_lists')
 
