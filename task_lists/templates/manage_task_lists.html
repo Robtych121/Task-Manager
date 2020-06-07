@@ -17,6 +17,8 @@
     </thead>
     <tbody>
         {% for task_list in task_lists %}
+        {% for task_list_user in task_list_users %}
+      {% if task_list_user.user_id == request.user.id and task_list_user.list_id == task_list.id and task_list_user.perm_view == 'Yes' %}
       <tr>
         <td>{{ task_list.id }}</td>
         <td>{{ task_list.name }}</td>
@@ -30,14 +32,26 @@
         </td>
         <td>
             <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+              {% for task_list_user in task_list_users %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_delete == 'Yes'  %}
                 <a type="button" href="{% url 'delete_task_list_post_manage' task_list.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            {% endfor %}
+            {% for task_list_user in task_list_users %}
+                {% if task_list_user.list_id == task_list.id and task_list_user.perm_edit == 'Yes'  %}
                 <a type="button" href="{% url 'edit_task_list_manage' task_list.id %}" class="btn btn-info">Edit</a>
+                {% endif %}
+            {% endfor %}
             </div>
         </td>
       </tr>
+      {% endif %}
+      {% endfor %}
       {% empty %}
       <p>No Lists Created</p>
+      
       {% endfor %}
+            
     </tbody>
   </table>
 
