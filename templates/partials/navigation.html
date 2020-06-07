@@ -20,29 +20,33 @@
   <p class="menu_section">Shared Lists</p>
   <ul class="nav nav-pills flex-column">
     {% for task_list in nav_task_lists %}
-    {% if task_list.type == 'Normal' %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'view_list' task_list.id %}"><i class="fas fa-bars"></i> {{ task_list.name }}</a>
-    </li>
-    {% endif %}
-    {% if task_list.type == 'Group' %}
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#listgroup{{task_list.id}}" role="button" aria-expanded="false" aria-controls="listgroup{{task_list.id}}">
-        <i class="far fa-folder"></i> {{ task_list.name }}
-      </a>
-      <div class="collapse" id="listgroup{{task_list.id}}">
-        <ul class="nav nav-pills flex-column collapsedTaskList">
-          {% for sub_task_list in sub_task_lists %}
-            {% if sub_task_list.parent_list == task_list.id %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'view_list' sub_task_list.id %}"><i class="fas fa-bars"></i> {{sub_task_list.name}}</a>
-            </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-    </li>
-    {% endif %}
+      {% for task_list_user in task_list_users %}
+      {% if task_list_user.user_id == request.user.id and task_list_user.list_id == task_list.id %}
+        {% if task_list.type == 'Normal' %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'view_list' task_list.id %}"><i class="fas fa-bars"></i> {{ task_list.name }}</a>
+        </li>
+        {% endif %}
+        {% if task_list.type == 'Group' %}
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#listgroup{{task_list.id}}" role="button" aria-expanded="false" aria-controls="listgroup{{task_list.id}}">
+            <i class="far fa-folder"></i> {{ task_list.name }}
+          </a>
+          <div class="collapse" id="listgroup{{task_list.id}}">
+            <ul class="nav nav-pills flex-column collapsedTaskList">
+              {% for sub_task_list in sub_task_lists %}
+                {% if sub_task_list.parent_list == task_list.id %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'view_list' sub_task_list.id %}"><i class="fas fa-bars"></i> {{sub_task_list.name}}</a>
+                </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </li>
+        {% endif %}
+      {% endif %}
+      {% endfor %}
     {% endfor %}
   </ul>
   <a class="add_list" href="{% url 'create_or_edit_task_list' %}"><p><i class="fas fa-plus"></i> New List</p></a>
