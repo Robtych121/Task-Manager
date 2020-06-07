@@ -39,3 +39,21 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Task_List_Users(models.Model):
+
+    class Meta:
+        verbose_name = 'Task List User'
+        verbose_name_plural = 'Task List Users'
+
+    list_id = models.IntegerField(blank=True, null=True)
+    user_id = models.IntegerField(blank=True, null=True)
+    YESNOCHOICES = (
+        ('Yes', 'Yes'),
+        ('No', 'No')
+    )
+    perm_view = models.CharField(max_length=25, choices=YESNOCHOICES, default='No')
+    perm_add = models.CharField(max_length=25, choices=YESNOCHOICES, default='No')
+    perm_edit = models.CharField(max_length=25, choices=YESNOCHOICES, default='No')
+    perm_delete = models.CharField(max_length=25, choices=YESNOCHOICES, default='No')
