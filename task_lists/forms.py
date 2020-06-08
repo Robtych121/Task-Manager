@@ -1,5 +1,5 @@
 from django import forms
-from .models import Task_List, Task
+from .models import Task_List, Task, Task_List_Users
 import html5.forms.widgets as html5_widgets
 
 class TaskListForm(forms.ModelForm):
@@ -26,3 +26,9 @@ class EditTaskForm(forms.ModelForm):
         widgets = {
             'due_date': html5_widgets.DateInput
         }
+
+
+class EditTaskListUserForm(forms.ModelForm):
+    class Meta:
+        model = Task_List_Users
+        fields = ('perm_view', 'perm_add', 'perm_edit', 'perm_delete')
