@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block page_title %}View User Permissions{% endblock %}
+{% block page_heading%}View User Permissions{% endblock %}
+
+{% block content %}
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Can View</th>
+        <th>Can Add</th>
+        <th>Can Edit</th>
+        <th>Can Delete</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for tasklistuser in tasklistusers%}
+<tr>
+    <td>
+        {% for user in users %}
+            {% if tasklistuser.user_id == user.id %}
+                {{ user.username}}
+            {%endif%}
+        {% endfor %}
+    </td>
+    <td>{{tasklistuser.perm_view}}</td>
+    <td>{{tasklistuser.perm_add}}</td>
+    <td>{{tasklistuser.perm_edit}}</td>
+    <td>{{tasklistuser.perm_delete}}</td>
+    <td>Actions</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<a href="{% url 'manage_task_lists' %}" class="btn btn-secondary">Return to Manage Lists</a>
+{% endblock %}

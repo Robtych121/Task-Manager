@@ -43,7 +43,7 @@
                 {% endif %}
             {% endfor %}
             {% if task_list.list_owner == request.user.id %}
-            <a type="button" href="#" class="btn btn-success">Users</a>
+            <a type="button" href="{% url 'view_task_list_users' task_list.id %}" class="btn btn-success">Users</a>
             {% endif %}
             </div>
         </td>
