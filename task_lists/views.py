@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import TaskListForm, CreateTaskForm, EditTaskListForm, EditTaskForm
+from .forms import TaskListForm, CreateTaskForm, EditTaskListForm, EditTaskForm, EditTaskListUserForm
 from .models import Task_List, Task, Task_List_Users
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_http_methods
@@ -230,3 +230,25 @@ def view_task_list_users(request, id):
     users = User.objects.all()
 
     return render(request, "view_task_list_users.html", {'tasklistusers': tasklistusers, 'users': users, 'tasklist': tasklist})
+
+
+def edit_task_list_users(request, id):
+    """
+    opens up edit form for when click into a task list user
+    """
+
+    tasklistuser = Task_List_Users.objects.get(pk=id)
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        form = EditTaskListUserForm(request.POST, instance=tasklistuser)
+        
+        if form.is_valid():
+            tasklistuser = form.save(commit=False)
+
+            tasklistuser.save()
+            return redirect('view_task_list_users', tasklistuser.list_id)
+    else:
+        form = EditTaskListUserForm(instance=tasklistuser)
+
+    return render(request, "edit_task_list_user.html", {'tasklistuser': tasklistuser, 'form':form})
