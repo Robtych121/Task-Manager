@@ -252,3 +252,15 @@ def edit_task_list_users(request, id):
         form = EditTaskListUserForm(instance=tasklistuser)
 
     return render(request, "edit_task_list_user.html", {'tasklistuser': tasklistuser, 'form':form})
+
+
+def delete_task_list_user_post(request, id):
+    """
+    Deletes the selected list user
+    """
+
+    task_list_used = Task_List_Users.objects.get(pk=id)
+
+    task_list_user = Task_List_Users.objects.get(pk=id)
+    task_list_user.delete()
+    return redirect('view_task_list_users', task_list_used.list_id)
