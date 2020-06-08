@@ -224,7 +224,9 @@ def view_task_list_users(request, id):
     """
     Opens up the list of users for a task list
     """
+
+    tasklist = Task_List.objects.get(pk=id)
     tasklistusers = Task_List_Users.objects.filter(list_id=id)
     users = User.objects.all()
 
-    return render(request, "view_task_list_users.html", {'tasklistusers': tasklistusers, 'users': users})
+    return render(request, "view_task_list_users.html", {'tasklistusers': tasklistusers, 'users': users, 'tasklist': tasklist})

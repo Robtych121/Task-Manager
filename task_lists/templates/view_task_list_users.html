@@ -2,13 +2,15 @@
 {% load bootstrap_tags %}
 
 {% block page_title %}View User Permissions{% endblock %}
-{% block page_heading%}View User Permissions{% endblock %}
+{% block page_heading%}View User Permissions - {{tasklist.name}}{% endblock %}
 
 {% block content %}
+<p><a href="" class="btn btn-success">Add User</a></p>
 <table class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>User</th>
+        <th>Owner</th>
         <th>Can View</th>
         <th>Can Add</th>
         <th>Can Edit</th>
@@ -23,6 +25,13 @@
         {% for user in users %}
             {% if tasklistuser.user_id == user.id %}
                 {{ user.username}}
+            {%endif%}
+        {% endfor %}
+    </td>
+    <td>
+        {% for user in users %}
+            {% if tasklist.list_owner == user.id%}
+                Yes
             {%endif%}
         {% endfor %}
     </td>
