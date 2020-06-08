@@ -5,6 +5,8 @@
 {% block page_heading%}<span>{{ task_list.name }}</span><span id="list_options_con"></span>{% endblock %}
 
 {% block content %}
+{% for task_list_user in task_list_users %}
+    {% if task_list_user.list_id == task_list.id and task_list_user.perm_view == 'Yes'  %}
 <div class="task-list-container">
 {% for task in tasks %}
 <a class="TaskContainer" href="{% url 'edit_task' task.id %}">
@@ -144,6 +146,8 @@ No Tasks Created
     });
 </script>
 
-
-
+{%else %}
+Sorry, You do not have permission to view this list.
+{% endif %}
+{% endfor %}
 {% endblock %}
