@@ -30,7 +30,7 @@
     </td>
     <td>
         {% for user in users %}
-            {% if tasklist.list_owner == user.id%}
+            {% if tasklistuser.user_id == user.id and tasklist.list_owner == user.id %}
                 Yes
             {%endif%}
         {% endfor %}
