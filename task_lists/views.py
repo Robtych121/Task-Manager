@@ -288,3 +288,16 @@ def add_task_list_user(request, id):
         form = EditTaskListUserForm()
 
     return render(request, "create_task_list_user.html", {'tasklistusers': tasklistusers, 'listsusers': listsusers, 'form':form})
+
+def set_list_owner(request, id):
+    """
+    Sets the user as the list owner
+    """
+    tasklistuser = Task_List_Users.objects.get(id=id)
+    tasklist = Task_List.objects.get(id=tasklistuser.list_id)
+
+
+    tasklist.list_owner = tasklistuser.user_id
+    tasklist.save()
+
+    return redirect('view_task_list_users', tasklistuser.list_id)

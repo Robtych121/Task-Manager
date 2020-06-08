@@ -41,7 +41,7 @@
     <td>{{tasklistuser.perm_delete}}</td>
     <td>
         <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
-          <a type="button" href="" class="btn btn-warning">Set Owner</a>
+          <a type="button" href="{% url 'set_list_owner' tasklistuser.id %}" class="btn btn-warning">Set Owner</a>
           <a type="button" href="{% url 'delete_task_list_user_post' tasklistuser.id %}" class="btn btn-danger">Delete</a>
           <a type="button" href="{% url 'edit_task_list_users' tasklistuser.id %}" class="btn btn-info">Edit</a>
       </div>
