@@ -20,6 +20,7 @@ class Task_List(models.Model):
         ('Descending', 'Descending')
     )
     sort_by = models.CharField(max_length=254, choices=SORTCHOICES, default='Ascending')
+    list_owner = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.name
