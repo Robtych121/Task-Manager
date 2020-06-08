@@ -11,12 +11,13 @@
 
 body {
     background: url('../img/prism.png');
+    height: 100%;
+    padding: 15px;
 }
 
 .external-con {
     background-color: white;
     padding: 15px;
-    margin: 15px;
     border: 1px solid #707070;
 }
 
