@@ -24,6 +24,7 @@ def create_or_edit_task_list(request, pk=None):
                 task_list.parent_list = None
             else:
                 task_list.parent_list = data.get('parent_list')
+            task_list.list_owner = request.user.id
             task_list.save()
             TaskListUsers = Task_List_Users(list_id=task_list.id, user_id=request.user.id, perm_view="Yes", perm_add="Yes", perm_edit="Yes", perm_delete="Yes")
             TaskListUsers.save()
