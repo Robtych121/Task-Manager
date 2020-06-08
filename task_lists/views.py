@@ -264,3 +264,27 @@ def delete_task_list_user_post(request, id):
     task_list_user = Task_List_Users.objects.get(pk=id)
     task_list_user.delete()
     return redirect('view_task_list_users', task_list_used.list_id)
+
+
+def add_task_list_user(request, id):
+    """
+    Adds a user to the task list users permissions
+    """
+
+    tasklistusers = Task_List_Users.objects.filter(list_id=id).values_list('user_id')
+    listsusers = User.objects.exclude(id__in=tasklistusers)
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        form = EditTaskListUserForm(request.POST)
+        
+        if form.is_valid():
+            tasklistuser = form.save(commit=False)
+            tasklistuser.list_id = id
+            tasklistuser.user_id = data.get('user_id')
+            tasklistuser.save()
+            return redirect('view_task_list_users', id)
+    else:
+        form = EditTaskListUserForm()
+
+    return render(request, "create_task_list_user.html", {'tasklistusers': tasklistusers, 'listsusers': listsusers, 'form':form})

@@ -5,7 +5,7 @@
 {% block page_heading%}View User Permissions - {{tasklist.name}}{% endblock %}
 
 {% block content %}
-<p><a href="" class="btn btn-success">Add User</a></p>
+<p><a href="{% url 'add_task_list_user' tasklist.id %}" class="btn btn-success">Add User</a></p>
 <table class="table table-bordered table-striped">
     <thead>
       <tr>
