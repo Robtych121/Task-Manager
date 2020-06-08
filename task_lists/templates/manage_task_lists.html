@@ -42,6 +42,9 @@
                 <a type="button" href="{% url 'edit_task_list_manage' task_list.id %}" class="btn btn-info">Edit</a>
                 {% endif %}
             {% endfor %}
+            {% if task_list.list_owner == request.user.id %}
+            <a type="button" href="#" class="btn btn-success">Users</a>
+            {% endif %}
             </div>
         </td>
       </tr>
