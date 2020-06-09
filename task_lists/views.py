@@ -41,11 +41,13 @@ def view_list(request, id):
     task_list = Task_List.objects.filter(id=id).first()
     if task_list.sort_by == 'Ascending':
         tasks = Task.objects.exclude(completed='Yes').filter(list=task_list.id).order_by('name')
+        completedtasks = Task.objects.exclude(completed='No').filter(list=task_list.id).order_by('name')
     else:
         tasks = Task.objects.exclude(completed='Yes').filter(list=task_list.id).order_by('-name')
+        completedtasks = Task.objects.exclude(completed='No').filter(list=task_list.id).order_by('-name')
     users = User.objects.all()
 
-    return render(request, 'view_task_list.html', {'tasks': tasks, 'task_list': task_list, 'users': users})
+    return render(request, 'view_task_list.html', {'tasks': tasks, 'completedtasks': completedtasks, 'task_list': task_list, 'users': users})
 
 
 @require_http_methods(["POST"])
