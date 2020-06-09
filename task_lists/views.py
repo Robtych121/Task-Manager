@@ -6,6 +6,12 @@ from django.views.decorators.http import require_http_methods
 
 
 # Create your views here.
+def homepage(request):
+    task_lists = Task_List.objects.all()
+
+    return render(request, 'home.html', {'home_task_lists': task_lists})
+
+
 def create_or_edit_task_list(request, pk=None):
     """
     Create a view that allows us to create
