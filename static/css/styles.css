@@ -200,3 +200,12 @@ a.btn-danger, a.btn-danger:hover {
     padding:0 10px; 
     color: grey;
 }
+
+#homepageheader {
+    font-weight: bold;
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-top: 10px;
+    border-left: 5px solid black;
+    color: #C41230;
+}
