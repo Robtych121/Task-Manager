@@ -66,6 +66,72 @@
 No Tasks Created
 {% endfor %}
 </div>
+{% if completedtasks %}
+<p id="completedtaskcontainer">
+    <a data-toggle="collapse" href="#completedtasks"aria-expanded="false" aria-controls="completedtasks">Show Completed Tasks</a>
+</p>
+{%endif %}
+<div id="completedtasks" class="task-list-container collapse">
+    {% for completedtask in completedtasks %}
+    <a class="TaskContainer" href="{% url 'edit_task' completedtask.id %}">
+        <div class="card TaskContainerInternal">
+            <div class="card-body task_list">
+            <table class="col-12">
+                <tr>
+                    <td style="width: 20px;">
+                        <form action="{% url 'set_completed_from_list' completedtask.id %}" method="POST">
+                            {% csrf_token %}
+                            <label class="container">
+                                <input class="form-check-input position-static" type="checkbox" name="completed{{completedtask.id}}" id="completed{{completedtask.id}}" {% if completedtask.completed == 'Yes' %}checked {% endif %}>
+                                <span class="checkmark"></span>
+                            </label>
+                        </form>
+                        <script>
+                            $(document).ready(function() {
+                                $('#completed{{completedtask.id}}').on('change', function() {
+                                    this.form.submit();
+                                });
+                            });
+                        </script>
+                    </td>
+                    <td>
+                        <div>
+                            <span class="TaskName">{{ completedtask.name}}</span>
+                        </div>
+                    </td>
+                    <td style="width: 60px; text-align: right; padding-right: 10px;">
+                        <div class="task_extras">
+                            {% for user in users %}
+                                {% if completedtask.assigned_to == user.id %}
+                                    {{user.username}}
+                                {% endif%}
+                            {%endfor%}
+                        </div>
+                    </td>
+                    <td style="width: 20px;">
+                        <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_list' completedtask.id %}" method="POST">
+                            {% csrf_token %}
+                            <input class="checkboxstar form-check-input position-static" type="checkbox" name="importance{{completedtask.id}}" id="importance{{completedtask.id}}" {% if completedtask.importance == 'Yes' %}checked {% endif %}>
+                        </form>
+                        <script>
+                            $(document).ready(function() {
+                                $('#importance{{completedtask.id}}').on('change', function() {
+                                    this.form.submit();
+                                });
+                            });
+                        </script>
+                    </td>
+                </tr>
+            </table>            
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    No Completed Tasks
+    {% endfor %}
+    </div>
+
+
 <hr>
 {% for task_list_user in task_list_users %}
     {% if task_list_user.list_id == task_list.id and task_list_user.perm_add == 'Yes'  %}

@@ -185,3 +185,18 @@ a.btn-danger, a.btn-danger:hover {
    content: "\2605";
    position: absolute;
 }
+
+
+#completedtaskcontainer {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid grey; 
+    line-height: 0.1em;
+    margin: 20px 0 20px; 
+}
+
+#completedtaskcontainer a { 
+    background:#fff; 
+    padding:0 10px; 
+    color: grey;
+}
