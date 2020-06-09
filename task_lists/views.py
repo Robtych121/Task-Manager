@@ -204,6 +204,8 @@ def edit_task(request, id):
     """
 
     task = Task.objects.get(pk=id)
+    tasklistusers = Task_List_Users.objects.filter(list_id=task.list.id)
+    users = User.objects.all()
 
     if request.method == "POST":
         data = request.POST.copy()
@@ -211,13 +213,13 @@ def edit_task(request, id):
         
         if form.is_valid():
             task = form.save(commit=False)
-
+            task.assigned_to = data.get('assigned_to')
             task.save()
             return redirect('view_list', task.list.id)
     else:
         form = EditTaskForm(instance=task)
 
-    return render(request, "edit_task.html", {'task': task, 'form':form})
+    return render(request, "edit_task.html", {'task': task, 'tasklistusers': tasklistusers, 'users': users, 'form':form})
 
 
 def view_task_list_users(request, id):

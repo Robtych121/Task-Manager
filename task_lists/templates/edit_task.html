@@ -8,6 +8,23 @@
     <form method="POST">
         {% csrf_token %}
         {{ form | as_bootstrap }}
+        <div id="groupListsContainer">
+            <div class="form-group">
+                <label for="id_assigned_to" class="control-label required-field ">Assigned To</label>
+                <select class="form-control" name="assigned_to" id="id_assigned_to">
+                    <option value="0">Please Select</option>
+                    {% for tasklistuser in tasklistusers %}
+                    <option value="{{tasklistuser.user_id}}" {% if task.assigned_to == tasklistuser.user_id %} selected {%endif%}>
+                        {% for user in users %}
+                        {% if tasklistuser.user_id == user.id%}
+                            {{ user.username }}
+                        {%endif%}
+                        {% endfor %}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
         <button type="submit" class="btn btn-info">Save</button>
         <a class="btn btn-danger" onclick="window.history.go(-1);">Cancel</a>
     </form>

@@ -35,11 +35,13 @@
                         <span class="TaskName">{{ task.name}}</span>
                     </div>
                 </td>
-                <td style="width: 60px;">
+                <td style="width: 60px; text-align: right; padding-right: 10px;">
                     <div class="task_extras">
-                        {% if task.assigned_to == user.id %}
-                            {{user.username}}
-                        {% endif%}
+                        {% for user in users %}
+                            {% if task.assigned_to == user.id %}
+                                {{user.username}}
+                            {% endif%}
+                        {%endfor%}
                     </div>
                 </td>
                 <td style="width: 20px;">
