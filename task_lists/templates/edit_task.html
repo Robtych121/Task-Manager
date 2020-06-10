@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label for="id_assigned_to" class="control-label required-field ">Assigned To</label>
                 <select class="form-control" name="assigned_to" id="id_assigned_to">
-                    <option value="0">Please Select</option>
+                    <option value="0">None</option>
                     {% for tasklistuser in tasklistusers %}
                     <option value="{{tasklistuser.user_id}}" {% if task.assigned_to == tasklistuser.user_id %} selected {%endif%}>
                         {% for user in users %}
