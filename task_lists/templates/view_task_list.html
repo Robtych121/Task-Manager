@@ -40,7 +40,7 @@
                         {{task.due_date}}  
                         {% for user in users %}
                             {% if task.assigned_to == user.id %}
-                                - <span class="assignedUser" data-toggle="tooltip" data-placement="top" title="{{user.username}}">{{user.username|slice:":2"|upper}}</span>
+                                - <span class="assignedUser" data-toggle="tooltip" data-placement="top" title="{{user.first_name}} {{user.last_name}}">{{user.first_name|slice:":1"|upper}}{{user.last_name|slice:":1"|upper}}</span>
                                 <script>
                                     $(function () {
                                         $('[data-toggle="tooltip"]').tooltip()
