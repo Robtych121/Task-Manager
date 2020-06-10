@@ -1,18 +1,15 @@
 {% extends 'base.html' %}
 
-{% block page_title %}Your Lists{% endblock %}
+{% block page_title %}Lists{% endblock %}
 {% block page_heading%}Your Lists{% endblock %}
 
 {% block content %}
-<p id="homepageheader">
-    <span>Your Lists</span>
-</p>
 <div class="row">
     <div class="col-md-4">
         <div class="card bg-light mb-3">
             <div class="card-header"><i class="fas fa-user"></i> Assigned To You</div>
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <p class="card-text display-4"><strong>Tasks : {% if assignedtocount %}{{assignedtocount}}{% else %}0{%endif%}</strong></p>
             </div>
         </div>
     </div>
@@ -20,7 +17,7 @@
         <div class="card bg-light mb-3">
             <div class="card-header"><i class="far fa-sun"></i> Today</div>
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text display-4"><strong>Tasks : {% if todaycount %}{{todaycount}}{% else %}0{%endif%}</strong></p>
             </div>
         </div>
     </div>
@@ -28,17 +25,15 @@
         <div class="card bg-light mb-3">
             <div class="card-header"><i class="far fa-calendar-alt"></i> Planned</div>
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text display-4"><strong>Tasks : {% if futurecount %}{{futurecount}}{% else %}0{%endif%}</strong></p>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-md-4">
         <div class="card bg-light mb-3">
             <div class="card-header"><i class="fas fa-star"></i> Important</div>
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text display-4"><strong>Tasks : {% if importancecount %}{{importancecount}}{% else %}0{%endif%}</strong></p>
             </div>
         </div>
     </div>
@@ -46,29 +41,9 @@
         <div class="card bg-light mb-3">
             <div class="card-header"><i class="fas fa-home"></i> Tasks</div>
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text display-4"><strong>Tasks : {% if taskscount %}{{taskscount}}{% else %}0{%endif%}</strong></p>
             </div>
         </div>
     </div>
 </div>
-
-<p id="homepageheader">
-    <span>Shared Lists</span>
-</p>
-{% for task_list in nav_task_lists %}
-    {% for task_list_user in task_list_users %}
-        {% if task_list_user.user_id == request.user.id and task_list_user.list_id == task_list.id and task_list_user.perm_view == 'Yes' %}    
-            {% if task_list.type == 'Normal' %}
-                {{ task_list.name }}
-            {% endif %}
-
-            {% for sub_task_list in sub_task_lists %}
-                {% if sub_task_list.parent_list == task_list.id %}
-                    {{sub_task_list.name}}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-    {% endfor %}
-{% endfor %}
-
 {% endblock %}

@@ -3,13 +3,22 @@ from .forms import TaskListForm, CreateTaskForm, EditTaskListForm, EditTaskForm,
 from .models import Task_List, Task, Task_List_Users
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_http_methods
+from django.utils import timezone
+from datetime import datetime
 
 
 # Create your views here.
 def homepage(request):
     task_lists = Task_List.objects.all()
 
-    return render(request, 'home.html', {'home_task_lists': task_lists})
+    assignedtocount = Task.objects.filter(assigned_to=request.user.id).count()
+    todaysdate = datetime.today()
+    todaycount = Task.objects.filter(assigned_to=request.user.id, due_date=todaysdate).count()
+    futurecount = Task.objects.filter(assigned_to=request.user.id, due_date__gt=todaysdate).count() 
+    importancecount = Task.objects.filter(assigned_to=request.user.id, importance='Yes').count()
+    taskscount = Task.objects.filter(assigned_to=request.user.id, list=None).count()
+
+    return render(request, 'home.html', {'home_task_lists': task_lists, 'assignedtocount': assignedtocount, 'todaycount': todaycount, 'futurecount': futurecount, 'importancecount': importancecount, 'taskscount': taskscount})
 
 
 def create_or_edit_task_list(request, pk=None):
