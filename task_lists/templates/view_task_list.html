@@ -37,10 +37,15 @@
                 </td>
                 <td style="width: 220px; text-align: right; padding-right: 10px;">
                     <div class="task_extras">
-                        {{task.due_date}} - 
+                        {{task.due_date}}  
                         {% for user in users %}
                             {% if task.assigned_to == user.id %}
-                                {{user.username}}
+                                - <span class="assignedUser" data-toggle="tooltip" data-placement="top" title="{{user.username}}">{{user.username|slice:":2"|upper}}</span>
+                                <script>
+                                    $(function () {
+                                        $('[data-toggle="tooltip"]').tooltip()
+                                        })
+                                </script>
                             {% endif%}
                         {%endfor%}
                     </div>

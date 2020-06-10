@@ -209,3 +209,9 @@ a.btn-danger, a.btn-danger:hover {
     border-left: 5px solid black;
     color: #C41230;
 }
+
+.assignedUser {
+    background-color: grey;
+    padding: 5px;
+    border-radius: 30px;
+}
