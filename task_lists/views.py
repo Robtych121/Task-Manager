@@ -5,9 +5,10 @@ from django.contrib.auth.models import User
 from django.views.decorators.http import require_http_methods
 from django.utils import timezone
 from datetime import datetime
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def homepage(request):
     task_lists = Task_List.objects.all()
 
