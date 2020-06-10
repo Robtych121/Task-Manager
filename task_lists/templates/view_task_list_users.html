@@ -24,7 +24,7 @@
     <td>
         {% for user in users %}
             {% if tasklistuser.user_id == user.id %}
-                {{ user.username}}
+                {{ user.first_name }} {{ user.last_name }}
             {%endif%}
         {% endfor %}
     </td>

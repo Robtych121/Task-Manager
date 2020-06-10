@@ -17,7 +17,7 @@
                     <option value="{{tasklistuser.user_id}}" {% if task.assigned_to == tasklistuser.user_id %} selected {%endif%}>
                         {% for user in users %}
                         {% if tasklistuser.user_id == user.id%}
-                            {{ user.username }}
+                            {{ user.first_name }} {{ user.last_name }}
                         {%endif%}
                         {% endfor %}
                     </option>
