@@ -321,3 +321,15 @@ def set_list_owner(request, id):
     tasklist.save()
 
     return redirect('view_task_list_users', tasklistuser.list_id)
+
+
+def assignedto_list(request):
+    """
+    A view to show the assigned tolist and the tasks associated to it
+    """
+    user_id = request.user.id
+    tasks = Task.objects.exclude(completed='Yes').filter(assigned_to=user_id).order_by('name')
+    completedtasks = Task.objects.exclude(completed='No').filter(assigned_to=user_id).order_by('name')
+    users = User.objects.all()
+
+    return render(request, 'view_task_assignedto_list.html', {'tasks': tasks, 'completedtasks': completedtasks, 'users': users})

@@ -2,7 +2,7 @@ from django.contrib.auth import views
 from django.urls import path
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
-from .views import homepage, create_or_edit_task_list, view_list, create_new_task_post, delete_task_list_post, manage_task_lists, delete_task_list_post_manage, edit_task_list, edit_task_list_manage, set_importance_from_list, set_completed_from_list, edit_task, view_task_list_users, edit_task_list_users, delete_task_list_user_post, add_task_list_user, set_list_owner
+from .views import homepage, create_or_edit_task_list, view_list, create_new_task_post, delete_task_list_post, manage_task_lists, delete_task_list_post_manage, edit_task_list, edit_task_list_manage, set_importance_from_list, set_completed_from_list, edit_task, view_task_list_users, edit_task_list_users, delete_task_list_user_post, add_task_list_user, set_list_owner, assignedto_list
 
 urlpatterns = [
     path('', homepage, name="home"),
@@ -22,4 +22,5 @@ urlpatterns = [
     path('delete_task_list_user_post/<int:id>', delete_task_list_user_post, name="delete_task_list_user_post"),
     path('add_task_list_user/<int:id>/', add_task_list_user, name="add_task_list_user"),
     path('set_list_owner/<int:id>', set_list_owner, name="set_list_owner"),
+    path('assigned_to_list/', assignedto_list, name="assignedto_list"),
 ]
