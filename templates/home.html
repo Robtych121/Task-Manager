@@ -31,6 +31,14 @@
     </div>
     <div class="col-md-4">
         <div class="card bg-light mb-3">
+            <div class="card-header"><i class="far fa-clock"></i> Overdue</div>
+            <div class="card-body">
+                <p class="card-text display-4"><strong>Tasks : {% if pastcount %}{{pastcount}}{% else %}0{%endif%}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-light mb-3">
             <div class="card-header"><i class="fas fa-star"></i> Important</div>
             <div class="card-body">
                 <p class="card-text display-4"><strong>Tasks : {% if importancecount %}{{importancecount}}{% else %}0{%endif%}</strong></p>
