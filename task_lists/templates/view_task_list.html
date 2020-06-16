@@ -54,6 +54,7 @@
                     <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_list' task.id %}" method="POST">
                         {% csrf_token %}
                         <input class="checkboxstar form-check-input position-static" type="checkbox" name="importance{{task.id}}" id="importance{{task.id}}" {% if task.importance == 'Yes' %}checked {% endif %}>
+                        <label class="checkboxlabel" for="importance{{task.id}}"></label>  
                     </form>
                     <script>
                         $(document).ready(function() {

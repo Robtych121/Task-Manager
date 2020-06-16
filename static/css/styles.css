@@ -168,24 +168,25 @@ a.btn-danger, a.btn-danger:hover {
     transition: all 0.2s;
 }
 
-.checkboxstar {
-    visibility:hidden;
-    font-size:30px;
-    cursor:pointer;
+.checkboxlabel {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	font-size: 29px;
+    color: #c41230;
+    line-height: 29px;
 }
-.checkboxstar:before {
-   content: "\2606";
-   position: absolute;
-   visibility:visible;
-   line-height: 13px;
-   padding-left: 13px;
-   color: #c41230;
-}
-.checkboxstar:checked:before {
-   content: "\2605";
-   position: absolute;
+.checkboxstar {  
+    display: none;  
 }
 
+.checkboxlabel:before {  
+    display: inline-block;  
+    content:"\2606";
+}
+.checkboxstar:checked + .checkboxlabel:before {
+    content:"\2605";
+}
 
 #completedtaskcontainer {
     width: 100%; 
