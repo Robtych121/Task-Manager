@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
 
-{% block page_title %}{{ task_list.name }}{% endblock %}
+{% block page_title %}Assigned To You{% endblock %}
 {% block page_heading%}Assigned To You{% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
         <table class="col-12">
             <tr>
                 <td style="width: 20px;">
-                    <form action="{% url 'set_completed_from_list' task.id %}" method="POST">
+                    <form action="{% url 'set_completed_from_assigned' task.id %}" method="POST">
                         {% csrf_token %}
                         <label class="container">
                             <input class="form-check-input position-static" type="checkbox" name="completed{{task.id}}" id="completed{{task.id}}" {% if task.completed == 'Yes' %}checked {% endif %}>
@@ -49,7 +49,7 @@
                     </div>
                 </td>
                 <td style="width: 20px;">
-                    <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_list' task.id %}" method="POST">
+                    <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_assigned' task.id %}" method="POST">
                         {% csrf_token %}
                         <input class="checkboxstar form-check-input position-static" type="checkbox" name="importance{{task.id}}" id="importance{{task.id}}" {% if task.importance == 'Yes' %}checked {% endif %}>
                         <label class="checkboxlabel" for="importance{{task.id}}"></label>  
@@ -84,7 +84,7 @@ No Tasks Created
             <table class="col-12">
                 <tr>
                     <td style="width: 20px;">
-                        <form action="{% url 'set_completed_from_list' completedtask.id %}" method="POST">
+                        <form action="{% url 'set_completed_from_assigned' completedtask.id %}" method="POST">
                             {% csrf_token %}
                             <label class="container">
                                 <input class="form-check-input position-static" type="checkbox" name="completed{{completedtask.id}}" id="completed{{completedtask.id}}" {% if completedtask.completed == 'Yes' %}checked {% endif %}>
@@ -114,9 +114,10 @@ No Tasks Created
                         </div>
                     </td>
                     <td style="width: 20px;">
-                        <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_list' completedtask.id %}" method="POST">
+                        <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_assigned' completedtask.id %}" method="POST">
                             {% csrf_token %}
                             <input class="checkboxstar form-check-input position-static" type="checkbox" name="importance{{completedtask.id}}" id="importance{{completedtask.id}}" {% if completedtask.importance == 'Yes' %}checked {% endif %}>
+                            <label class="checkboxlabel" for="importance{{completedtask.id}}"></label>
                         </form>
                         <script>
                             $(document).ready(function() {

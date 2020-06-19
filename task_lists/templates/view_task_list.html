@@ -119,7 +119,8 @@ No Tasks Created
                         <form id="importanceForm" name="importanceForm" action="{% url 'set_importance_from_list' completedtask.id %}" method="POST">
                             {% csrf_token %}
                             <input class="checkboxstar form-check-input position-static" type="checkbox" name="importance{{completedtask.id}}" id="importance{{completedtask.id}}" {% if completedtask.importance == 'Yes' %}checked {% endif %}>
-                        </form>
+                            <label class="checkboxlabel" for="importance{{completedtask.id}}"></label>  
+                            </form>
                         <script>
                             $(document).ready(function() {
                                 $('#importance{{completedtask.id}}').on('change', function() {
