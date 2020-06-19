@@ -7,7 +7,7 @@
 {% block content %}
 <div class="task-list-container">
 {% for task in tasks %}
-<a class="TaskContainer" href="{% url 'edit_task' task.id %}">
+<a class="TaskContainer" href="{% url 'edit_assigned_task' task.id %}">
     <div class="card TaskContainerInternal">
         <div class="card-body task_list">
         <table class="col-12">
@@ -78,7 +78,7 @@ No Tasks Created
 {%endif %}
 <div id="completedtasks" class="task-list-container collapse">
     {% for completedtask in completedtasks %}
-    <a class="TaskContainer" href="{% url 'edit_task' completedtask.id %}">
+    <a class="TaskContainer" href="{% url 'edit_assigned_task' completedtask.id %}">
         <div class="card TaskContainerInternal">
             <div class="card-body task_list">
             <table class="col-12">

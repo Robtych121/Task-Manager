@@ -2,7 +2,7 @@ from django.contrib.auth import views
 from django.urls import path
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
-from .views import homepage, create_or_edit_task_list, view_list, create_new_task_post, delete_task_list_post, manage_task_lists, delete_task_list_post_manage, edit_task_list, edit_task_list_manage, set_importance_from_list, set_completed_from_list, edit_task, view_task_list_users, edit_task_list_users, delete_task_list_user_post, add_task_list_user, set_list_owner, assignedto_list, set_importance_from_assigned, set_completed_from_assigned
+from .views import homepage, create_or_edit_task_list, view_list, create_new_task_post, delete_task_list_post, manage_task_lists, delete_task_list_post_manage, edit_task_list, edit_task_list_manage, set_importance_from_list, set_completed_from_list, edit_task, view_task_list_users, edit_task_list_users, delete_task_list_user_post, add_task_list_user, set_list_owner, assignedto_list, set_importance_from_assigned, set_completed_from_assigned, edit_assigned_task
 
 urlpatterns = [
     path('', homepage, name="home"),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('assigned_to_list/', assignedto_list, name="assignedto_list"),
     path('set_assigned_importance/<int:id>', set_importance_from_assigned, name="set_importance_from_assigned"),
     path('set_assigned_completed/<int:id>', set_completed_from_assigned, name="set_completed_from_assigned"),
+    path('edit_assigned_task/<int:id>', edit_assigned_task, name="edit_assigned_task"),
 ]

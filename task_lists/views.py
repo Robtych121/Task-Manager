@@ -370,3 +370,24 @@ def set_completed_from_assigned(request, id):
             task.completed = 'Yes'
         task.save()
         return redirect('assignedto_list')
+
+
+def edit_assigned_task(request, id):
+    """
+    opens up edit form for when click into a task
+    """
+
+    task = Task.objects.get(pk=id)
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        form = EditTaskForm(request.POST, instance=task)
+        
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.save()
+            return redirect('assignedto_list')
+    else:
+        form = EditTaskForm(instance=task)
+
+    return render(request, "edit_assigned_task.html", {'task': task, 'form':form})
