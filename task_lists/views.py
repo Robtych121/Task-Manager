@@ -604,3 +604,73 @@ def edit_overdue_task(request, id):
         form = EditTaskForm(instance=task)
 
     return render(request, "edit_assigned_task.html", {'task': task, 'form':form})
+
+
+def importanttasks_list(request):
+    """
+    A view to show the overdue tolist and the tasks associated to it
+    """
+
+    user_id = request.user.id
+    tasks = Task.objects.exclude(completed='Yes').filter(assigned_to=request.user.id, importance='Yes').order_by('name')
+    completedtasks = Task.objects.exclude(completed='No').filter(assigned_to=request.user.id, importance='Yes').order_by('name')
+    users = User.objects.all()
+
+    return render(request, 'view_task_important_list.html', {'tasks': tasks, 'completedtasks': completedtasks, 'users': users})
+
+
+def set_importance_from_important(request, id):
+    """
+    Sets the importance flag from task list
+    """
+
+    task = Task.objects.get(pk=id)
+    importance = 'importance' + str(task.id)
+
+    if request.method == 'POST':
+        data = request.POST.copy()
+        if data.get(importance) == None:
+            task.importance = 'No'
+        else:
+            task.importance = 'Yes'
+        task.save()
+        return redirect('importanttasks_list')
+
+
+def set_completed_from_important(request, id):
+    """
+    Sets the completed flag from task list
+    """
+
+    task = Task.objects.get(pk=id)
+    completed = 'completed' + str(task.id)
+
+    if request.method == 'POST':
+        data = request.POST.copy()
+        if data.get(completed) == None:
+            task.completed = 'No'
+        else:
+            task.completed = 'Yes'
+        task.save()
+        return redirect('importanttasks_list')
+
+
+def edit_important_task(request, id):
+    """
+    opens up edit form for when click into a task
+    """
+
+    task = Task.objects.get(pk=id)
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        form = EditTaskForm(request.POST, instance=task)
+        
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.save()
+            return redirect('importanttasks_list')
+    else:
+        form = EditTaskForm(instance=task)
+
+    return render(request, "edit_assigned_task.html", {'task': task, 'form':form})

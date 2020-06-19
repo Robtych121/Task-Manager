@@ -2,7 +2,7 @@ from django.contrib.auth import views
 from django.urls import path
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
-from .views import homepage, create_or_edit_task_list, view_list, create_new_task_post, delete_task_list_post, manage_task_lists, delete_task_list_post_manage, edit_task_list, edit_task_list_manage, set_importance_from_list, set_completed_from_list, edit_task, view_task_list_users, edit_task_list_users, delete_task_list_user_post, add_task_list_user, set_list_owner, assignedto_list, set_importance_from_assigned, set_completed_from_assigned, edit_assigned_task, todaytasks_list, set_importance_from_today, set_completed_from_today, edit_today_task, plannedtasks_list, set_importance_from_planned, set_completed_from_planned, edit_planned_task, overduetasks_list, set_importance_from_overdue, set_completed_from_overdue, edit_overdue_task
+from .views import homepage, create_or_edit_task_list, view_list, create_new_task_post, delete_task_list_post, manage_task_lists, delete_task_list_post_manage, edit_task_list, edit_task_list_manage, set_importance_from_list, set_completed_from_list, edit_task, view_task_list_users, edit_task_list_users, delete_task_list_user_post, add_task_list_user, set_list_owner, assignedto_list, set_importance_from_assigned, set_completed_from_assigned, edit_assigned_task, todaytasks_list, set_importance_from_today, set_completed_from_today, edit_today_task, plannedtasks_list, set_importance_from_planned, set_completed_from_planned, edit_planned_task, overduetasks_list, set_importance_from_overdue, set_completed_from_overdue, edit_overdue_task, importanttasks_list, set_importance_from_important, set_completed_from_important, edit_important_task
 
 urlpatterns = [
     path('', homepage, name="home"),
@@ -38,4 +38,8 @@ urlpatterns = [
     path('set_overdue_importance/<int:id>', set_importance_from_overdue, name="set_importance_from_overdue"),
     path('set_overdue_completed/<int:id>', set_completed_from_overdue, name="set_completed_from_overdue"),
     path('edit_overdue_task/<int:id>', edit_overdue_task, name="edit_overdue_task"),
+    path('important_tasks_list', importanttasks_list, name="importanttasks_list"),
+    path('set_important_importance/<int:id>', set_importance_from_important, name="set_importance_from_important"),
+    path('set_important_completed/<int:id>', set_completed_from_important, name="set_completed_from_important"),
+    path('edit_important_task/<int:id>', edit_important_task, name="edit_important_task"),
 ]
