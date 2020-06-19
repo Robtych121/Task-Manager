@@ -405,3 +405,60 @@ def todaytasks_list(request):
     users = User.objects.all()
 
     return render(request, 'view_task_today_list.html', {'tasks': tasks, 'completedtasks': completedtasks, 'users': users})
+
+
+def set_importance_from_today(request, id):
+    """
+    Sets the importance flag from task list
+    """
+
+    task = Task.objects.get(pk=id)
+    importance = 'importance' + str(task.id)
+
+    if request.method == 'POST':
+        data = request.POST.copy()
+        if data.get(importance) == None:
+            task.importance = 'No'
+        else:
+            task.importance = 'Yes'
+        task.save()
+        return redirect('todaytasks_list')
+
+
+def set_completed_from_today(request, id):
+    """
+    Sets the completed flag from task list
+    """
+
+    task = Task.objects.get(pk=id)
+    completed = 'completed' + str(task.id)
+
+    if request.method == 'POST':
+        data = request.POST.copy()
+        if data.get(completed) == None:
+            task.completed = 'No'
+        else:
+            task.completed = 'Yes'
+        task.save()
+        return redirect('todaytasks_list')
+
+
+def edit_today_task(request, id):
+    """
+    opens up edit form for when click into a task
+    """
+
+    task = Task.objects.get(pk=id)
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        form = EditTaskForm(request.POST, instance=task)
+        
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.save()
+            return redirect('todaytasks_list')
+    else:
+        form = EditTaskForm(instance=task)
+
+    return render(request, "edit_assigned_task.html", {'task': task, 'form':form})
