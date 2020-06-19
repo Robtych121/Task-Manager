@@ -12,13 +12,13 @@ from django.contrib.auth.decorators import login_required
 def homepage(request):
     task_lists = Task_List.objects.all()
 
-    assignedtocount = Task.objects.filter(assigned_to=request.user.id).count()
+    assignedtocount = Task.objects.exclude(completed='Yes').filter(assigned_to=request.user.id).count()
     todaysdate = datetime.today()
-    todaycount = Task.objects.filter(assigned_to=request.user.id, due_date=todaysdate).count()
-    futurecount = Task.objects.filter(assigned_to=request.user.id, due_date__gt=todaysdate).count() 
-    pastcount = Task.objects.filter(assigned_to=request.user.id, due_date__lt=todaysdate).count() 
-    importancecount = Task.objects.filter(assigned_to=request.user.id, importance='Yes').count()
-    taskscount = Task.objects.filter(assigned_to=request.user.id, list=None).count()
+    todaycount = Task.objects.exclude(completed='Yes').filter(assigned_to=request.user.id, due_date=todaysdate).count()
+    futurecount = Task.objects.exclude(completed='Yes').filter(assigned_to=request.user.id, due_date__gt=todaysdate).count() 
+    pastcount = Task.objects.exclude(completed='Yes').filter(assigned_to=request.user.id, due_date__lt=todaysdate).count() 
+    importancecount = Task.objects.exclude(completed='Yes').filter(assigned_to=request.user.id, importance='Yes').count()
+    taskscount = Task.objects.exclude(completed='Yes').filter(assigned_to=request.user.id, list=None).count()
 
     return render(request, 'home.html', {'home_task_lists': task_lists, 'assignedtocount': assignedtocount, 'todaycount': todaycount, 'futurecount': futurecount, 'pastcount': pastcount, 'importancecount': importancecount, 'taskscount': taskscount})
 
