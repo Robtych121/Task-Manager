@@ -674,3 +674,86 @@ def edit_important_task(request, id):
         form = EditTaskForm(instance=task)
 
     return render(request, "edit_assigned_task.html", {'task': task, 'form':form})
+
+
+def persontasks_list(request):
+    """
+    A view to show the personal tolist and the tasks associated to it
+    """
+
+    user_id = request.user.id
+    tasks = Task.objects.exclude(completed='Yes').filter(assigned_to=request.user.id, list=None).order_by('name')
+    completedtasks = Task.objects.exclude(completed='No').filter(assigned_to=request.user.id, list=None).order_by('name')
+    users = User.objects.all()
+
+    return render(request, 'view_task_personal_list.html', {'tasks': tasks, 'completedtasks': completedtasks, 'users': users})
+
+
+def set_importance_from_personal(request, id):
+    """
+    Sets the importance flag from task list
+    """
+
+    task = Task.objects.get(pk=id)
+    importance = 'importance' + str(task.id)
+
+    if request.method == 'POST':
+        data = request.POST.copy()
+        if data.get(importance) == None:
+            task.importance = 'No'
+        else:
+            task.importance = 'Yes'
+        task.save()
+        return redirect('persontasks_list')
+
+
+def set_completed_from_personal(request, id):
+    """
+    Sets the completed flag from task list
+    """
+
+    task = Task.objects.get(pk=id)
+    completed = 'completed' + str(task.id)
+
+    if request.method == 'POST':
+        data = request.POST.copy()
+        if data.get(completed) == None:
+            task.completed = 'No'
+        else:
+            task.completed = 'Yes'
+        task.save()
+        return redirect('persontasks_list')
+
+
+def edit_personal_task(request, id):
+    """
+    opens up edit form for when click into a task
+    """
+
+    task = Task.objects.get(pk=id)
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        form = EditTaskForm(request.POST, instance=task)
+        
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.save()
+            return redirect('persontasks_list')
+    else:
+        form = EditTaskForm(instance=task)
+
+    return render(request, "edit_assigned_task.html", {'task': task, 'form':form})
+
+
+@require_http_methods(["POST"])
+def create_new_task_post_personal(request):
+    """
+    Creates new task from a posted form on personal task list
+    """
+    data = request.POST.copy()
+
+    task = Task(name=data.get('new_task'), assigned_to=data.get('assigned_to'))
+    task.save()
+
+    return redirect('persontasks_list')
