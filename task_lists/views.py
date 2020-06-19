@@ -391,3 +391,17 @@ def edit_assigned_task(request, id):
         form = EditTaskForm(instance=task)
 
     return render(request, "edit_assigned_task.html", {'task': task, 'form':form})
+
+
+def todaytasks_list(request):
+    """
+    A view to show the today tolist and the tasks associated to it
+    """
+
+    todaysdate = datetime.today()
+    user_id = request.user.id
+    tasks = Task.objects.exclude(completed='Yes').filter(assigned_to=user_id, due_date=todaysdate).order_by('name')
+    completedtasks = Task.objects.exclude(completed='No').filter(assigned_to=user_id, due_date=todaysdate).order_by('name')
+    users = User.objects.all()
+
+    return render(request, 'view_task_today_list.html', {'tasks': tasks, 'completedtasks': completedtasks, 'users': users})
