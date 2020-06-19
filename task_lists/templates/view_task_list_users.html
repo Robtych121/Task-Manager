@@ -6,6 +6,7 @@
 
 {% block content %}
 <p><a href="{% url 'add_task_list_user' tasklist.id %}" class="btn btn-success">Add User</a></p>
+<div class="table-responsive">
 <table class="table table-bordered table-striped">
     <thead>
       <tr>
@@ -50,6 +51,6 @@
 {% endfor %}
 </tbody>
 </table>
-
+</div>
 <a href="{% url 'manage_task_lists' %}" class="btn btn-secondary">Return to Manage Lists</a>
 {% endblock %}
