@@ -129,6 +129,10 @@ a.btn-danger, a.btn-danger:hover {
     margin-bottom: 5px;
 }
 
+.task-box {
+    background-color: #C41230;
+}
+
 .container input {position: absolute;opacity: 0;cursor: pointer;height: 0;width: 0;}
 
 .checkmark {position: absolute;top: 5px;left: 0;height: 25px;width: 25px;background-color: #eee;border: 1px solid #C41230;border-radius: 25px;}
@@ -225,5 +229,13 @@ a.btn-danger, a.btn-danger:hover {
 
 .menu_section:hover {
     background-color: #c41230;
+    color: white;
+}
+
+.card-footer {
+    padding: 3px 10px;
+}
+
+.card-link, .card-link:hover {
     color: white;
 }
