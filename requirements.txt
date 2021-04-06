@@ -15,7 +15,7 @@ django-forms-bootstrap==3.1.0
 django-html5==1.0.0
 django-js-asset==1.2.2
 django-recaptcha==2.0.6
-django-registration==3.1
+django-registration==3.1.2
 django-storages==1.9.1
 dnspython==1.16.0
 docutils==0.15.2
